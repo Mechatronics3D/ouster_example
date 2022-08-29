@@ -5,6 +5,7 @@
   <arg name="rviz_config" default="$(find ouster_ros)/config/viz.rviz" doc="optional rviz config file"/>
   <arg name="tf_prefix" default="" doc="namespace for tf transforms"/>
   <arg name="timestamp_mode" default=""/>
+  <arg name="ouster_node" default="os_node" doc="node name for Ouster packets"/>
 
   <group ns="$(arg ouster_ns)">
     <node pkg="nodelet" type="nodelet" name="os_cloud_node"
@@ -33,8 +34,8 @@
 
   <!-- for compatibility with < 2.0 rosbags -->
   <node pkg="topic_tools" name="relay_lidar" type="relay"
-    args="/os_node/lidar_packets /$(arg ouster_ns)/lidar_packets"/>
+    args="/$(arg ouster_node)/lidar_packets /$(arg ouster_ns)/lidar_packets"/>
   <node pkg="topic_tools" name="relay_imu" type="relay"
-    args="/os_node/imu_packets /$(arg ouster_ns)/imu_packets"/>
+    args="/$(arg ouster_node)/imu_packets /$(arg ouster_ns)/imu_packets"/>
 
 </launch>
